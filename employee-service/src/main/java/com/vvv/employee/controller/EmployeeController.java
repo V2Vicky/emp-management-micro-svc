@@ -2,6 +2,7 @@ package com.vvv.employee.controller;
 
 
 import com.vvv.employee.dto.EmployeeDTO;
+import com.vvv.employee.dto.ResponseDTO;
 import com.vvv.employee.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable Long id) {
+    public ResponseEntity<ResponseDTO> getEmployeeById(@PathVariable Long id) {
         return ResponseEntity.ok(service.getEmployeeById(id));
     }
 

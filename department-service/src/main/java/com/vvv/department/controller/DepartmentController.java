@@ -25,8 +25,13 @@ public class DepartmentController {
         return ResponseEntity.ok(service.getDepartmentById(id));
     }
 
+    @GetMapping("/department-code/{departmentCode}")
+    public ResponseEntity<DepartmentDTO> getByDepartmentCode(@PathVariable String departmentCode) {
+        return ResponseEntity.ok(service.getDepartmentByCode(departmentCode));
+    }
+
     @GetMapping
-    public ResponseEntity<List<DepartmentDTO>> getAll() {
+    public ResponseEntity<List<DepartmentDTO>> getAllDepartment() {
         return ResponseEntity.ok(service.getAllDepartments());
     }
 

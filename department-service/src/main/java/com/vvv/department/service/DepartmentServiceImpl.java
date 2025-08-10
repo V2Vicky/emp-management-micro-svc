@@ -5,7 +5,6 @@ import com.vvv.department.entity.Department;
 import com.vvv.department.exception.ResourceNotFoundException;
 import com.vvv.department.mapper.DepartmentMapper;
 import com.vvv.department.repository.DepartmentRepository;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,12 +12,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor
 @RequiredArgsConstructor
 public class DepartmentServiceImpl implements DepartmentService{
 
-    private DepartmentRepository repository;
-    private DepartmentMapper mapper;
+    private final DepartmentRepository repository;
+    private final DepartmentMapper mapper;
 
     @Override
     public DepartmentDTO createDepartment(DepartmentDTO dto) {
@@ -30,6 +28,12 @@ public class DepartmentServiceImpl implements DepartmentService{
     public DepartmentDTO getDepartmentById(Long id) {
         Department department = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Department not found"));
+        return mapper.toDto(department);
+    }
+
+    @Override
+    public DepartmentDTO getDepartmentByCode(String deptCode) {
+        Department department = repository.findByDepartmentCode(deptCode);
         return mapper.toDto(department);
     }
 
